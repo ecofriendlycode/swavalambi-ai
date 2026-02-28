@@ -4,21 +4,32 @@ import { signOut } from 'aws-amplify/auth';
 
 function App() {
   return (
-    <Authenticator
-      signUpAttributes={['name']}
-      formFields={{
-        signUp: {
-          name: {
-            label: 'Name',
-            placeholder: 'Enter your full name',
-            isRequired: true,
-            order: 1,
+    <div style={styles.appContainer}>
+      <div style={styles.authHeader}>
+        <h1 style={styles.appTitle}>Swavalambi</h1>
+        <p style={styles.appSubtitle}>Skills to Self Reliance</p>
+      </div>
+      <Authenticator
+        signUpAttributes={['name']}
+        formFields={{
+          signUp: {
+            name: {
+              label: 'Name',
+              placeholder: 'Enter your full name',
+              isRequired: true,
+              order: 1,
+            },
           },
-        },
-      }}
-    >
-      {({ user }) => <Dashboard user={user} />}
-    </Authenticator>
+        }}
+        components={{
+          Header() {
+            return null; // Hide default header since we have custom one
+          },
+        }}
+      >
+        {({ user }) => <Dashboard user={user} />}
+      </Authenticator>
+    </div>
   );
 }
 
@@ -56,35 +67,58 @@ function Dashboard({ user }: any) {
 }
 
 const styles = {
+  appContainer: {
+    minHeight: '100vh',
+    background: '#ffffff',
+    padding: '20px',
+  },
+  authHeader: {
+    textAlign: 'center' as const,
+    marginBottom: '30px',
+    paddingTop: '40px',
+  },
+  appTitle: {
+    fontSize: '48px',
+    fontWeight: 'bold',
+    margin: '0',
+    color: '#FF6B35',
+  },
+  appSubtitle: {
+    fontSize: '20px',
+    color: '#666',
+    margin: '10px 0 0',
+  },
   container: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: '#ffffff',
     padding: '20px',
   },
   header: {
     textAlign: 'center' as const,
-    color: 'white',
     marginBottom: '40px',
   },
   title: {
     fontSize: '48px',
     fontWeight: 'bold',
     margin: '20px 0 10px',
+    color: '#FF6B35',
   },
   subtitle: {
     fontSize: '24px',
     fontWeight: '300',
     margin: '0',
+    color: '#666',
   },
   main: {
-    maxWidth: '500px',
+    maxWidth: '600px',
     margin: '0 auto',
   },
   card: {
     background: 'white',
-    borderRadius: '16px',
+    border: '2px solid #f0f0f0',
+    borderRadius: '12px',
     padding: '30px',
-    boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
     marginBottom: '20px',
   },
   cardTitle: {
@@ -97,7 +131,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '12px 0',
-    borderBottom: '1px solid #eee',
+    borderBottom: '1px solid #f0f0f0',
   },
   label: {
     fontWeight: '600',
@@ -114,9 +148,9 @@ const styles = {
     color: 'white',
     background: '#FF6B35',
     border: 'none',
-    borderRadius: '12px',
+    borderRadius: '8px',
     cursor: 'pointer',
-    transition: 'transform 0.2s',
+    transition: 'background 0.2s',
   },
 };
 
