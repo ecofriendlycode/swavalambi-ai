@@ -13,13 +13,5 @@ export const auth = defineAuth({
       required: true,
       mutable: true,
     },
-    'custom:age': {
-      dataType: 'Number',
-      mutable: true,
-    },
-  },
-  multifactor: {
-    mode: 'OPTIONAL',
-    sms: true,
   },
 });
