@@ -5,27 +5,14 @@ import { signOut } from 'aws-amplify/auth';
 function App() {
   return (
     <Authenticator
-      signUpAttributes={['email', 'name', 'phone_number']}
-      loginMechanisms={['email']}
+      signUpAttributes={['name']}
       formFields={{
         signUp: {
-          email: {
-            label: 'Email',
-            placeholder: 'Enter your email',
-            isRequired: true,
-            order: 1,
-          },
           name: {
             label: 'Name',
             placeholder: 'Enter your full name',
             isRequired: true,
-            order: 2,
-          },
-          phone_number: {
-            label: 'Mobile Number (Optional)',
-            placeholder: '+91XXXXXXXXXX',
-            isRequired: false,
-            order: 3,
+            order: 1,
           },
         },
       }}
@@ -47,11 +34,11 @@ function Dashboard({ user }: any) {
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>User Information</h3>
           <div style={styles.infoRow}>
-            <span style={styles.label}>Email:</span>
+            <span style={styles.label}>Login ID:</span>
             <span style={styles.value}>{user?.signInDetails?.loginId || 'N/A'}</span>
           </div>
           <div style={styles.infoRow}>
-            <span style={styles.label}>Name:</span>
+            <span style={styles.label}>Username:</span>
             <span style={styles.value}>{user?.username || 'N/A'}</span>
           </div>
           <div style={styles.infoRow}>
