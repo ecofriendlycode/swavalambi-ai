@@ -1,4 +1,4 @@
-# Swavalambi Web App
+# Swavalambi-ai Web App
 
 Skills to Self Reliance - AWS Amplify Gen 2 Application
 
