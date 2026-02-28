@@ -1,11 +1,11 @@
-import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { signOut } from 'aws-amplify/auth';
 
 function App() {
   return (
     <Authenticator
-      signUpAttributes={['phone_number', 'name', 'custom:age']}
+      signUpAttributes={['phone_number', 'name']}
       loginMechanisms={['phone_number']}
       formFields={{
         signUp: {
@@ -20,12 +20,6 @@ function App() {
             placeholder: 'Enter your full name',
             isRequired: true,
             order: 2,
-          },
-          'custom:age': {
-            label: 'Age',
-            placeholder: 'Enter your age',
-            isRequired: true,
-            order: 3,
           },
         },
       }}
@@ -60,7 +54,7 @@ function Dashboard({ user }: any) {
           </div>
         </div>
 
-        <button onClick={signOut} style={styles.button}>
+        <button onClick={() => signOut()} style={styles.button}>
           Logout
         </button>
       </main>
