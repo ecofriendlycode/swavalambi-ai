@@ -1,10 +1,10 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { signOut } from 'aws-amplify/auth';
-import { generateClient } from 'aws-amplify/data';
+// import { generateClient } from 'aws-amplify/data';
 import { useEffect } from 'react';
 
-const client = generateClient();
+// const client = generateClient();
 
 function App() {
   return (
