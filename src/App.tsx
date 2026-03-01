@@ -1,6 +1,11 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { signOut } from 'aws-amplify/auth';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../amplify/data/resource';
+import { useEffect } from 'react';
+
+const client = generateClient<Schema>();
 
 function App() {
   return (
@@ -34,13 +39,27 @@ function App() {
 }
 
 function Dashboard({ user }: any) {
+  useEffect(() => {
+    // Create profile if it doesn't exist
+    const createProfile = async () => {
+      try {
+        await client.models.UserProfile.create({
+          userId: user.userId,
+          email: user.signInDetails?.loginId || '',
+          name: user.username || '',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.log('Profile might already exist or error:', error);
+      }
+    };
+    
+    createProfile();
+  }, [user]);
+
   return (
     <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.title}>Swavalambi</h1>
-        <h2 style={styles.subtitle}>Skills to Self Reliance</h2>
-      </header>
-
       <main style={styles.main}>
         <div style={styles.card}>
           <h3 style={styles.cardTitle}>User Information</h3>
