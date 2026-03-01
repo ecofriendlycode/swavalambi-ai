@@ -1,10 +1,11 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { signOut } from 'aws-amplify/auth';
-// import { generateClient } from 'aws-amplify/data';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../amplify/data/resource';
 import { useEffect } from 'react';
 
-// const client = generateClient();
+const client = generateClient<Schema>();
 
 function App() {
   return (
@@ -39,18 +40,18 @@ function App() {
 
 function Dashboard({ user }: any) {
   useEffect(() => {
-    // TODO: Enable after backend deployment
     // Create profile if it doesn't exist
     const createProfile = async () => {
       try {
-        // await client.models.UserProfile.create({
-        //   userId: user.userId,
-        //   email: user.signInDetails?.loginId || '',
-        //   name: user.username || '',
-        //   createdAt: new Date().toISOString(),
-        //   updatedAt: new Date().toISOString(),
-        // });
-        console.log('Profile creation will be enabled after backend deployment');
+        await client.models.UserProfile.create({
+          userId: user.userId,
+          email: user.signInDetails?.loginId || '',
+          name: user.username || '',
+          profileStatus: 'incomplete',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        });
+        console.log('Profile created successfully');
       } catch (error) {
         console.log('Profile might already exist or error:', error);
       }
